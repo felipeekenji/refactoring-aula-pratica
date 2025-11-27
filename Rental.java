@@ -16,7 +16,6 @@ public class Rental {
         return _movie;
     }
 
-    // Método 'amountFor' movido de Customer e renomeado para 'getCharge'
     public double getCharge() {
         double result = 0;
         // determine amounts for each line
@@ -34,6 +33,19 @@ public class Rental {
                 if (getDaysRented() > 3)
                     result += (getDaysRented() - 3) * 1.5;
                 break;
+        }
+        return result;
+    }
+
+    // NOVO MÉTODO MOVIDO E EXTRAÍDO
+    public int getFrequentRenterPoints() {
+        // Inicialmente, todo aluguel ganha 1 ponto
+        int result = 1; 
+
+        // Adiciona bônus para aluguel de lançamento por dois dias
+        if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
+            getDaysRented() > 1) {
+            result++; 
         }
         return result;
     }

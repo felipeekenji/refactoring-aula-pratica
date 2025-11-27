@@ -26,21 +26,17 @@ public class Customer {
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement();
 
-            // A variável thisAmount foi removida
+            //determine amounts for each line
+            double thisAmount = each.getCharge(); 
 
             // add frequent renter points
-            frequentRenterPoints ++;
-            // add bonus for a two day new release rental
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-                each.getDaysRented() > 1) frequentRenterPoints ++;
+            // CHAMADA AO NOVO MÉTODO MOVIDO
+            frequentRenterPoints += each.getFrequentRenterPoints(); 
 
             //show figures for this rental
-            // Substituição da variável temporária (thisAmount) pela chamada do método (each.getCharge())
             result += "\t" + each.getMovie().getTitle()+ "\t" +
-                String.valueOf(each.getCharge()) + "\n"; // <--- MUDANÇA
-                
-            // Substituição da variável temporária (thisAmount) pela chamada do método (each.getCharge())
-            totalAmount += each.getCharge(); // <--- MUDANÇA
+                String.valueOf(each.getCharge()) + "\n";
+            totalAmount += each.getCharge();
 
         }
         //add footer lines
