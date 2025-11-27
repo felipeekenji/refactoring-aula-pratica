@@ -26,9 +26,7 @@ public class Customer {
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement();
 
-            //determine amounts for each line
-            // Chamada atualizada para o novo método na classe Rental
-            double thisAmount = each.getCharge(); 
+            // A variável thisAmount foi removida
 
             // add frequent renter points
             frequentRenterPoints ++;
@@ -37,9 +35,12 @@ public class Customer {
                 each.getDaysRented() > 1) frequentRenterPoints ++;
 
             //show figures for this rental
+            // Substituição da variável temporária (thisAmount) pela chamada do método (each.getCharge())
             result += "\t" + each.getMovie().getTitle()+ "\t" +
-                String.valueOf(thisAmount) + "\n";
-            totalAmount += thisAmount;
+                String.valueOf(each.getCharge()) + "\n"; // <--- MUDANÇA
+                
+            // Substituição da variável temporária (thisAmount) pela chamada do método (each.getCharge())
+            totalAmount += each.getCharge(); // <--- MUDANÇA
 
         }
         //add footer lines
