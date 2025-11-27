@@ -5,19 +5,35 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String _title;
-    private int _priceCode;
+    // Campo _priceCode removido
+    private Price _price; // NOVO CAMPO DO TIPO Price
 
     public Movie(String title, int priceCode) {
         _title = title;
-        _priceCode = priceCode;
+        // Chama o novo setPriceCode
+        setPriceCode(priceCode);
     }
 
     public int getPriceCode() {
-        return _priceCode;
+        // Delega a chamada para o objeto Price
+        return _price.getPriceCode();
     }
 
     public void setPriceCode(int arg) {
-        _priceCode = arg;
+        // O switch agora cria o objeto Price apropriado
+        switch (arg) {
+            case REGULAR:
+                _price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                _price = new ChildrensPrice();
+                break;
+            case NEW_RELEASE:
+                _price = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
+        }
     }
 
     public String getTitle (){
@@ -26,7 +42,6 @@ public class Movie {
 
     public double getCharge(int daysRented) {
         double result = 0;
-        // determine amounts for each line (switch-case movido de Rental)
         switch (getPriceCode()) {
             case REGULAR:
                 result += 2;
@@ -45,11 +60,9 @@ public class Movie {
         return result;
     }
 
-    // NOVO MÉTODO MOVIDO E EXTRAÍDO
     public int getFrequentRenterPoints(int daysRented) {
         int result = 1; 
 
-        // Adiciona bônus se for um lançamento por mais de um dia
         if ((getPriceCode() == Movie.NEW_RELEASE) &&
             daysRented > 1) {
             result++; 
