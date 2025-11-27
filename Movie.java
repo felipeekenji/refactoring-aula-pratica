@@ -24,7 +24,6 @@ public class Movie {
         return _title;
     }
 
-    // NOVO MÉTODO MOVIDO E EXTRAÍDO (substitui a lógica de cálculo)
     public double getCharge(int daysRented) {
         double result = 0;
         // determine amounts for each line (switch-case movido de Rental)
@@ -42,6 +41,18 @@ public class Movie {
                 if (daysRented > 3)
                     result += (daysRented - 3) * 1.5;
                 break;
+        }
+        return result;
+    }
+
+    // NOVO MÉTODO MOVIDO E EXTRAÍDO
+    public int getFrequentRenterPoints(int daysRented) {
+        int result = 1; 
+
+        // Adiciona bônus se for um lançamento por mais de um dia
+        if ((getPriceCode() == Movie.NEW_RELEASE) &&
+            daysRented > 1) {
+            result++; 
         }
         return result;
     }
