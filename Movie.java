@@ -1,26 +1,23 @@
 public class Movie {
+    // ... (atributos e construtor inalterados) ...
 
     public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
 
     private String _title;
-    // Campo _priceCode removido
-    private Price _price; // NOVO CAMPO DO TIPO Price
+    private Price _price;
 
     public Movie(String title, int priceCode) {
         _title = title;
-        // Chama o novo setPriceCode
         setPriceCode(priceCode);
     }
 
     public int getPriceCode() {
-        // Delega a chamada para o objeto Price
         return _price.getPriceCode();
     }
 
     public void setPriceCode(int arg) {
-        // O switch agora cria o objeto Price apropriado
         switch (arg) {
             case REGULAR:
                 _price = new RegularPrice();
@@ -40,24 +37,9 @@ public class Movie {
         return _title;
     }
 
+    // MÉTODO MODIFICADO: Delega a chamada para o objeto _price
     public double getCharge(int daysRented) {
-        double result = 0;
-        switch (getPriceCode()) {
-            case REGULAR:
-                result += 2;
-                if (daysRented > 2)
-                    result += (daysRented - 2) * 1.5;
-                break;
-            case NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-            case CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3)
-                    result += (daysRented - 3) * 1.5;
-                break;
-        }
-        return result;
+        return _price.getCharge(daysRented);
     }
 
     public int getFrequentRenterPoints(int daysRented) {
