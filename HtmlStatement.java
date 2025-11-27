@@ -1,8 +1,6 @@
 
 public class HtmlStatement extends Statement {
 
-    // Método value removido, herdado de Statement
-
     public String headerString(String name) {
         return "<H1>Rentals for <EM>" + name + "</EM></H1><P>\n";
     }

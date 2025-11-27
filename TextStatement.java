@@ -1,8 +1,6 @@
 
 public class TextStatement extends Statement {
 
-    // Método value removido, herdado de Statement
-
     public String headerString(String name) {
         return "Rental Record for " + name + "\n";
     }
