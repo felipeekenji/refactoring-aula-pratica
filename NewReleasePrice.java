@@ -7,15 +7,8 @@ public class NewReleasePrice extends Price {
         return daysRented * 3;
     }
 
-    // Implementa a lógica de bônus (1 ponto + 1 bônus se alugado por > 1 dia)
+    // MÉTODO SOBRESCRITO (override) que adiciona o bônus
     public int getFrequentRenterPoints(int daysRented) {
-        return (daysRented > 1) ? 2 : 1; 
-        
-        // Alternativa com if/else:
-        // if (daysRented > 1) {
-        //     return 2;
-        // } else {
-        //     return 1;
-        // }
+        return (daysRented > 1) ? 2 : 1;
     }
 }
