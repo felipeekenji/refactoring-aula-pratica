@@ -9,4 +9,9 @@ public class ChildrensPrice extends Price {
             result += (daysRented - 3) * 1.5;
         return result;
     }
+    
+    // Retorna o valor base de 1 ponto
+    public int getFrequentRenterPoints(int daysRented) {
+        return 1;
+    }
 }
