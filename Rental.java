@@ -16,33 +16,15 @@ public class Rental {
         return _movie;
     }
 
+    // Método getCharge() simplificado para delegar a chamada a Movie
     public double getCharge() {
-        double result = 0;
-        // determine amounts for each line
-        switch (getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                result += 2;
-                if (getDaysRented() > 2)
-                    result += (getDaysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                result += getDaysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                result += 1.5;
-                if (getDaysRented() > 3)
-                    result += (getDaysRented() - 3) * 1.5;
-                break;
-        }
-        return result;
+        // Usa o método getCharge() da classe Movie, passando daysRented
+        return _movie.getCharge(getDaysRented()); 
     }
 
-    // NOVO MÉTODO MOVIDO E EXTRAÍDO
     public int getFrequentRenterPoints() {
-        // Inicialmente, todo aluguel ganha 1 ponto
         int result = 1; 
 
-        // Adiciona bônus para aluguel de lançamento por dois dias
         if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
             getDaysRented() > 1) {
             result++; 
